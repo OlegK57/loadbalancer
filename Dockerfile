@@ -4,8 +4,8 @@ MAINTAINER OlegK57
 LABEL maintainer "OlegK57@gmail.com"
 
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
-COPY run.sh /opt/my_run.sh
+COPY run.sh /opt/run.sh
 
-RUN chmod +x /opt/my_run.sh
+RUN chmod +x /opt/run.sh
 
-CMD /opt/my_run.sh
+ENTRYPOINT /opt/run.sh
