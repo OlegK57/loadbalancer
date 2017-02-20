@@ -5,8 +5,10 @@ LABEL maintainer "OlegK57@gmail.com"
 
 ENV CONSUL_TEMPLATE_VERSION=0.18.1
 
+RUN apt-get update && apt-get install -y wget 
+
 # Download consul-template
-RUN ( apt-get update && apt-get install -y wget && wget --no-check-certificate https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz -O /tmp/consul_template.tar.gz && gunzip /tmp/consul_template.tar.gz && cd /tmp && tar xf /tmp/consul_template.tar && cd /tmp/consul-template* && mv consul-template /usr/bin && rm -rf /tmp/* )
+RUN ( wget --no-check-certificate https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz -O /tmp/consul_template.tgz && cd /tmp && tar xzf /tmp/consul_template.tar && mv consul-template /usr/bin && rm -rf /tmp/* )
 
 COPY files/haproxy.json /tmp/haproxy.json
 COPY files/haproxy.ctmpl /tmp/haproxy.ctmpl
