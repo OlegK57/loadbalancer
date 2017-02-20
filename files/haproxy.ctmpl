@@ -23,7 +23,7 @@ backend server_lolek
    option httpchk GET /index.html
    http-check expect string "Hello Lolek!"
 
-  {{range service "Lolek"}}
+  {{range service "lolek"}}
   server {{.Node}} {{.Address}}:{{.Port}} check{{end}}
 
 backend server_bolek
@@ -33,7 +33,7 @@ backend server_bolek
    option httpchk GET /index.html
    http-check expect string "Hello Bolek!"
 
-  {{range service "Bolek"}}
+  {{range service "bolek"}}
   server {{.Node}} {{.Address}}:{{.Port}} check{{end}}
 
 listen stats *:1936
