@@ -1,5 +1,5 @@
 template {
   source = "/tmp/haproxy.ctmpl"
   destination = "/usr/local/etc/haproxy/haproxy.cfg"
-  command = "haproxy -f /usr/local/etc/haproxy/haproxy.cfg -sf $(pidof haproxy) &"
+  command = "bash -c 'haproxy -f /usr/local/etc/haproxy/haproxy.cfg -D -st $(pidof haproxy)'"
 }

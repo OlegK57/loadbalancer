@@ -1,11 +1,22 @@
+resolvers mydns
+  nameserver dns1 8.8.8.8:53
+  resolve_retries       3
+  timeout retry         1s
+  hold other           30s
+  hold refused         30s
+  hold nx              30s
+  hold timeout         30s
+  hold valid           10s
+
 defaults
-        mode    http
+  mode    http
+  maxconn 2000
 
-        timeout connect 5000
-        timeout client 5000
-        timeout server 5000
+  timeout connect 5000
+  timeout client 5000
+  timeout server 5000
 
-        default-server inter 3s fall 3 rise 2 init-addr last,libc,none
+  default-server inter 3s fall 3 rise 2 init-addr last,libc,none
 
 frontend main
   bind *:80
@@ -24,7 +35,7 @@ backend server_lolek
    http-check expect string "Hello Lolek!"
 
   {{range service "lolek-80"}}
-  server {{.Node}} {{.Address}}:{{.Port}} check{{end}}
+  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}
 
 backend server_bolek
 
@@ -34,4 +45,4 @@ backend server_bolek
    http-check expect string "Hello Bolek!"
 
   {{range service "bolek-80"}}
-  server {{.Node}} {{.Address}}:{{.Port}} check{{end}}
+  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}
