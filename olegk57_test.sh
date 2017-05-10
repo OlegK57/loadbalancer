@@ -41,10 +41,10 @@ eval "$(docker-machine env -u)"
 
 IP=$(docker-machine ip default)
 
+echo
 echo "Tests URLs"
 echo "========================="
 echo
-
 
 echo "http://$IP:/lolek/index.html"
 echo "http://$IP:/lolek/version.html"
