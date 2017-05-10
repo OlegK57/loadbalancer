@@ -42,15 +42,15 @@ eval "$(docker-machine env -u)"
 IP=$(docker-machine ip default)
 
 echo
-echo "Tests URLs"
+echo "Test URLs"
 echo "========================="
 echo
 
-echo "http://$IP:/lolek/index.html"
-echo "http://$IP:/lolek/version.html"
+echo "http://$IP/lolek/index.html"
+echo "http://$IP/lolek/version.html"
 echo
-echo "http://$IP:/bolek/index.html"
-echo "http://$IP:/bolek/version.html"
+echo "http://$IP/bolek/index.html"
+echo "http://$IP/bolek/version.html"
 echo
 
 echo "Consul server"
