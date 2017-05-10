@@ -34,8 +34,8 @@ backend server_lolek
    option httpchk GET /index.html
    http-check expect string "Hello Lolek!"
 
-  {{range service "lolek-80"}}
-  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}
+  {{ range services }} {{ if .Name | regexMatch "lolek.*" }} {{ range service .Name }}
+  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}{{end}}{{end}}
 
 backend server_bolek
 
@@ -44,5 +44,5 @@ backend server_bolek
    option httpchk GET /index.html
    http-check expect string "Hello Bolek!"
 
-  {{range service "bolek-80"}}
-  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}
+  {{ range services }} {{ if .Name | regexMatch "bolek.*" }} {{ range service .Name }}
+  server {{.Node}}_{{.Address}}_{{.Port}} {{.Address}}:{{.Port}} check{{end}}{{end}}{{end}}
